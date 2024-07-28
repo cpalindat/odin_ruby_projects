@@ -15,20 +15,19 @@ board = Board.new
 board.make_move(0,0,player_one)
 board.update_board
 
-board.print_board
-
-board.make_move(0,0,player_two)
-board.update_board
-
 board.make_move(1,1,player_two)
 board.update_board
 
-board.make_move(0,1,player_one)
-board.make_move(0,2,player_one)
+board.make_move(1,0,player_one)
+board.make_move(2,0,player_one)
 board.update_board
 
 board.print_board
 
+p board.print_moves
+
 if board.check_victory?
   p "winner"
+else
+  p "no winner"
 end

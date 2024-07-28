@@ -3,12 +3,13 @@ require_relative 'player'
 
 class Board
   def initialize 
+    # TO DO refactor this so its not a 2D matrix - instead just label positions 1 - 9 and display the options in the UI during move selection
     @moves = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]
     @board = draw_board_row(0) + draw_board_divider() + draw_board_row(1) + draw_board_divider() + draw_board_row(2)
   end
 
   def draw_board_row(row_number)
-    @moves[0][row_number].colorize(:mode => :bold) + "|".colorize(:green) + @moves[1][row_number].colorize(:mode => :bold) + "|".colorize(:green) + @moves[2][row_number].colorize(:mode => :bold) + "\n"
+    @moves[row_number][0].colorize(:mode => :bold) + "|".colorize(:green) + @moves[row_number][1].colorize(:mode => :bold) + "|".colorize(:green) + @moves[row_number][2].colorize(:mode => :bold) + "\n"
   end
 
   def draw_board_divider
