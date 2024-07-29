@@ -49,7 +49,31 @@ class Board
 
   # TO DO Check for a victory condition
   def check_victory?
-    
+    if @moves[0] == @moves[1] && @moves[1] == @moves[2]
+      puts "Player #{@moves[0]} is the winner!".colorize(:mode => :bold).colorize(:green)
+      return true
+    elsif @moves[3] == @moves[4] && @moves[4] == @moves[5]
+      puts "Player #{@moves[0]} is the winner!".colorize(:mode => :bold).colorize(:green)
+      return true
+    elsif @moves[6] == @moves[7] && @moves[7] == @moves[8]
+      puts "Player #{@moves[0]} is the winner!".colorize(:mode => :bold).colorize(:green)
+      return true
+    elsif @moves[0] == @moves[3] && @moves[3] == @moves[6]
+      puts "Player #{@moves[0]} is the winner!".colorize(:mode => :bold).colorize(:green)
+      return true
+    elsif @moves[1] == @moves[4] && @moves[4] == @moves[7]
+      puts "Player #{@moves[0]} is the winner!".colorize(:mode => :bold).colorize(:green)
+      return true
+    elsif @moves[2] == @moves[5] && @moves[5] == @moves[8]
+      puts "Player #{@moves[0]} is the winner!".colorize(:mode => :bold).colorize(:green)
+      return true
+    elsif @moves[0] == @moves[4] && @moves[4] == @moves[8]
+      puts "Player #{@moves[0]} is the winner!".colorize(:mode => :bold).colorize(:green)
+      return true
+    elsif @moves[2] == @moves[4] && @moves[4] == @moves[6]
+      puts "Player #{@moves[0]} is the winner!".colorize(:mode => :bold).colorize(:green)
+      return true
+    end
 
     return false
   end
