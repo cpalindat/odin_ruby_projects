@@ -4,70 +4,54 @@ require_relative 'player'
 class Board
   def initialize 
     # TO DO refactor this so its not a 2D matrix - instead just label positions 1 - 9 and display the options in the UI during move selection
-    @moves = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]
-    @board = draw_board_row(0) + draw_board_divider() + draw_board_row(1) + draw_board_divider() + draw_board_row(2)
+    @moves = [1,2,3,4,5,6,7,8,9]
+    @board = " " + print_moves_cell(0) + " | ".colorize(:green) + print_moves_cell(1) + " | ".colorize(:green) + print_moves_cell(2) +
+    "\n" + draw_board_divider() + " " + print_moves_cell(3) + " | ".colorize(:green) + print_moves_cell(4) + " | ".colorize(:green) + print_moves_cell(5) +
+    "\n" + draw_board_divider() + " " + print_moves_cell(6) + " | ".colorize(:green) + print_moves_cell(7) + " | ".colorize(:green) + print_moves_cell(8)
   end
 
-  def draw_board_row(row_number)
-    @moves[row_number][0].colorize(:mode => :bold) + "|".colorize(:green) + @moves[row_number][1].colorize(:mode => :bold) + "|".colorize(:green) + @moves[row_number][2].colorize(:mode => :bold) + "\n"
+  def print_moves_cell(index)
+    @moves[index].to_s.colorize(:mode => :bold)
   end
 
   def draw_board_divider
-    "- - -\n".colorize(:green)
+    "--- --- ---\n".colorize(:green)
   end
 
-  # print the board
+  # Print the board
   def print_board
     puts ""
     puts @board
     puts ""
   end
 
-  # print the current array of moves
-  def print_moves
-    @moves.each do |row|
-      p row
-    end
-  end
-
-  # update the moves array with a new move, with the players symbol
-  def make_move(row, col, player)
-    if @moves[col][row] != " "
-      puts "Square is unavailable for a move.".colorize(:red)
+  # Update the moves array with a new move, with the players symbol
+  def execute_move(selection, player)
+    if selection > 10 || selection < 0
+      puts ""
+      puts "Invalid move. Select a number between 1 and 9.".colorize(:red)
       return false
     end
-    @moves[col][row] = player.symbol
+    if @moves[selection - 1] == "X" || @moves[selection - 1] == "O"
+      puts ""
+      puts "Invalid move. Cell is already selected.".colorize(:red)
+      return false
+    end
+    @moves[selection - 1] = player.symbol
     return true
   end
 
   def update_board
-    @board = draw_board_row(0) + draw_board_divider() + draw_board_row(1) + draw_board_divider() + draw_board_row(2)
+    @board = " " + print_moves_cell(0) + " | ".colorize(:green) + print_moves_cell(1) + " | ".colorize(:green) + print_moves_cell(2) +
+    "\n" + draw_board_divider() + " " + print_moves_cell(3) + " | ".colorize(:green) + print_moves_cell(4) + " | ".colorize(:green) + print_moves_cell(5) +
+    "\n" + draw_board_divider() + " " + print_moves_cell(6) + " | ".colorize(:green) + print_moves_cell(7) + " | ".colorize(:green) + print_moves_cell(8)  
   end
 
-  # check for a victory condition
+  # TO DO Check for a victory condition
   def check_victory?
-    # check rows for victory
-    @moves.each do |row| 
-      if row[0] == row[1] && row[1] == row[2]
-        return true
-      end
-    end
-
-    # TODO: check cols for victory
-    @moves.each_with_index do |row, index|
-      if @moves[0][index] == @moves[0][index + 1] && @moves[0][index + 1] == @moves[0][index + 2]
-        return true
-      end
-    end
-
-    # check diagonal for victory
-    if @moves[0][0] == @moves[1][1] && @moves[1][1] == @moves[2][2]
-      return true
-    elsif @moves[0][2] == @moves[1][1] && @moves[1][1] == @moves[2][0]
-      return true
-    end
+    
 
     return false
-    end
+  end
 
 end
