@@ -1,8 +1,18 @@
-
+require_relative 'display'
 
 class Player
   def initialize
     
+  end
+
+  def guess()
+    guesses = []
+    4.times do 
+      print 'Enter your guess: '
+      guess = gets.chomp.to_i
+      guesses.push(guess)
+    end
+    return guesses
   end
 end
 
