@@ -34,9 +34,13 @@ loop do
   board.update_board()
   board.print_board()
 
-  # TO DO Check for victory condition and break out of loop if true
+  # Check for victory condition and break out of loop if true
   # TO DO Check for stalemate and break out of loop if true
   break if board.check_victory?
+  if board.check_tie?
+    puts "No winner. Tie game!"
+    break
+  end
 
   # Swap to other player
   case current_player

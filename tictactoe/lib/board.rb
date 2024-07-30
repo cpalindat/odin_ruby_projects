@@ -78,4 +78,9 @@ class Board
     return false
   end
 
+  def check_tie?
+    if @moves.all? { |move| move == "X" || move == "O" } then return true
+    end
+  end
+
 end
